@@ -2,7 +2,7 @@ class UserController < ApplicationController
 
   get '/users/:id' do
      if !logged_in?
-       redirect '/games'
+       redirect '/login'
      end
 
      @user = User.find(params[:id])
@@ -36,7 +36,7 @@ class UserController < ApplicationController
      if !session[:user_id]
        erb :'users/login'
      else
-       redirect '/bags'
+       redirect '/games'
      end
    end
 
