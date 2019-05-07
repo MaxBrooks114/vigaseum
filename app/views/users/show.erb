@@ -1,0 +1,9 @@
+<h1>Ayyyy <%= @user.username &>!</h1>
+
+<p>Your collection's looking mad tight my dude/dudette.</p>
+
+ <% @user.consoles.each do |console| %>
+    <%= console.name %><br>
+    <%console.games.each do |game| %>
+    <%= game.name %>
+<%end%>
