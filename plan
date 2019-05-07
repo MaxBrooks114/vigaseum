@@ -2,9 +2,9 @@ A user can sign up, delete account, log in, log out
 
 A user has consoles and games
 
-consoles have names, games, release date, generation(?), company
+consoles have names, games, acquired date, generation(?), company
 
-games have names, genres, release dates, review score(yours), consoles
+games have names, genres, acquired dates, review score(yours), consoles
 
 user can edit which consoles he owns and which games
 
