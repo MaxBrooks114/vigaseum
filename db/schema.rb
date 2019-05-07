@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20190507151331) do
-=======
-ActiveRecord::Schema.define(version: 20190507143847) do
->>>>>>> 4671371e66afc87ef021e6996776b7a8602b6e34
 
   create_table "consoles", force: :cascade do |t|
     t.string  "name"
@@ -25,7 +21,6 @@ ActiveRecord::Schema.define(version: 20190507143847) do
     t.integer "generation"
     t.integer "user_id"
   end
-<<<<<<< HEAD
 
   create_table "games", force: :cascade do |t|
     t.string  "name"
@@ -36,8 +31,6 @@ ActiveRecord::Schema.define(version: 20190507143847) do
     t.integer "console_id"
     t.integer "user_id"
   end
-=======
->>>>>>> 4671371e66afc87ef021e6996776b7a8602b6e34
 
   create_table "users", force: :cascade do |t|
     t.string "email"

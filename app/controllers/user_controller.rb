@@ -1,35 +1,32 @@
+
 class UsersController < ApplicationController
 
-  get '/users/:slug' do
-    slug = params[:slug]
-    @user = User.find_by_slug(slug)
-    erb :"users/show"
-  end
 
    get '/signup' do
      if !session[:user_id]
        erb :'users/signup'
      else
-       redirect to 'users/:slug'
+       redirect to "/collection"
      end
    end
 
    post '/signup' do
      if params[:username].empty?|| params[:password].empty? || params[:email].empty?
        redirect to '/signup'
+     elsif !User.new(params[:user]).valid?
+       redirect to '/login'
      else
-       @user = User.create(:username => params[:username], :password => params[:password],:email => params[:email])
-       session[:user_id] = @user.id
-       redirect '/users/:slug'
+       @user = User.create(:username => params[:username], :password => params[:password], :email => params[:email])
+       session[:user_id] = user.id
+       redirect "/collection"
      end
    end
 
    get '/login' do
-     @error_message = params[:error]
-     if !session[:user_id]
+     if !logged_in?
        erb :'users/login'
      else
-       redirect '/users:slug'
+       redirect  "/collection"
      end
    end
 
@@ -37,9 +34,9 @@ class UsersController < ApplicationController
      user = User.find_by(:username => params[:username])
      if user && user.authenticate(params[:password])
        session[:user_id] = user.id
-       redirect "/users/:slug"
+       redirect "/collection"
      else
-       redirect to '/signup'
+       redirect to '/login'
      end
    end
 
@@ -51,5 +48,11 @@ class UsersController < ApplicationController
        redirect to '/'
      end
    end
+
+  get '/users/:slug' do
+    slug = params[:slug]
+    @user = User.find_by_slug(slug)
+    erb :"users/show"
+  end
 
  end

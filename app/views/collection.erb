@@ -1,6 +1,5 @@
-<h1>Ayyyy <%= @user.username %>!</h1>
-
-<p>Your collection's looking mad tight my dude/dudette.</p>
+<h1><%= @user.username %>'s Gaming Museum</h1>
+<p>Peep your wares below:</p>
 
  <% @user.consoles.each do |console| %>
     <%= console.name %><br>

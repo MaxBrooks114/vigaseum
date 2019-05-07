@@ -1,6 +1,6 @@
 class ConsolesController < ApplicationController
 
-   get "/consoles" do
+   get '/consoles' do
     redirect_if_not_logged_in
     consoles = Console.all
     @user = current_user
@@ -13,13 +13,13 @@ class ConsolesController < ApplicationController
     erb :'consoles/new'
   end
 
-  get "/consoles/:id/edit" do
+  get "/consoles/:slug/edit" do
     redirect_if_not_logged_in
     @console = Console.find(params[:id])
     erb :'console/edit'
   end
 
-  post "/consoles/:id" do
+  post "/consoles/:slug" do
     redirect_if_not_logged_in
     @console = Console.find(params[:id])
     unless Console.valid_params?(params)
@@ -29,7 +29,7 @@ class ConsolesController < ApplicationController
     redirect "/consoles/#{@console.id}"
   end
 
-  get "/consoles/:id" do
+  get "/consoles/:slug" do
     redirect_if_not_logged_in
     @console = Console.find(params[:id])
     erb :'consoles/show'
