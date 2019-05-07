@@ -1,23 +1,16 @@
 class UserController < ApplicationController
 
-  get '/users/:id' do
-     if !logged_in?
-       redirect '/login'
-     end
-
-     @user = User.find(params[:id])
-     if !@user.nil? && @user == current_user
-       erb :'users/show'
-     else
-       redirect '/games'
-     end
-   end
+  get '/users/:slug' do
+    slug = params[:slug]
+    @user = User.find_by_slug(slug)
+    erb :"users/show"
+  end
 
    get '/signup' do
      if !session[:user_id]
        erb :'users/signup'
      else
-       redirect to '/games'
+       redirect to 'users/:slug'
      end
    end
 
@@ -27,7 +20,7 @@ class UserController < ApplicationController
      else
        @user = User.create(:username => params[:username], :password => params[:password])
        session[:user_id] = @user.id
-       redirect '/games'
+       redirect '/users/:slug'
      end
    end
 
@@ -36,7 +29,7 @@ class UserController < ApplicationController
      if !session[:user_id]
        erb :'users/login'
      else
-       redirect '/games'
+       redirect '/users:slug'
      end
    end
 
@@ -44,7 +37,7 @@ class UserController < ApplicationController
      user = User.find_by(:username => params[:username])
      if user && user.authenticate(params[:password])
        session[:user_id] = user.id
-       redirect "/games"
+       redirect "/users/:slug"
      else
        redirect to '/signup'
      end
