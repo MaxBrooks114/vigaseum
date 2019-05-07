@@ -1,4 +1,4 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
 
   get '/users/:slug' do
     slug = params[:slug]
@@ -15,7 +15,7 @@ class UserController < ApplicationController
    end
 
    post '/signup' do
-     if params[:username].empty?|| params[:password].empty?
+     if params[:username].empty?|| params[:password].empty? || params[:email].empty?
        redirect to '/signup'
      else
        @user = User.create(:username => params[:username], :password => params[:password])
