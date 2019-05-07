@@ -13,9 +13,6 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
-  get '/collection' do
-    erb :collection
-  end
 
 
   helpers do

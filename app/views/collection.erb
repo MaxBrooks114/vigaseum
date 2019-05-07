@@ -1,9 +1,0 @@
-<h1><%= @user.username %>'s Gaming Museum</h1>
-<p>Peep your wares below:</p>
-
- <% @user.consoles.each do |console| %>
-    <%= console.name %><br>
-    <%console.games.each do |game| %>
-    <%= game.name %>
-<%end%>
-<%end%>
