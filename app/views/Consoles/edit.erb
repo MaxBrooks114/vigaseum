@@ -1,0 +1,23 @@
+<h1>Edit your Console</h1>
+
+<form action="/consoles<%=@console.slug%>" method= "post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <input type="text" name="name" placeholder="name"> <br />
+   <input type="text" name="company" placeholder="company"> <br />
+   <input type="date" name="date added" placeholder="date_added"> <br />
+   <input type="integer" name="generation" placeholder="generation"> <br />
+   <input type="submit" value="submit">
+  </form>
+
+  <form action="" method="post">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" value="delete" id="Delete">
+  </form>
+
+  <br>
+  <br>
+  <br>
+  <a href="/users/:slug">Back to your Collection</a>
+  <br>
+  <br>
+  <a href="/logout">Logout</a>
