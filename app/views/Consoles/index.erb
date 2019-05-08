@@ -1,7 +1,7 @@
-<h1> <%=@user.username%>'s consoles:</h1>
-<% @user.consoles.each do |console|%>
+<h1> <%=@console.user.username%>'s Consoles:</h1>
+<% @consoles.each do |console|%>
 <ul>
-    <li><%=console.name%></li>
+    <li> <a href="/consoles/<%=console.slug%>"><%=console.name%></a></li>
 </ul>
 
 <%end%>
