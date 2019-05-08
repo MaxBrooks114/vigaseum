@@ -23,10 +23,10 @@ class ConsolesController < ApplicationController
     redirect_if_not_logged_in
     @console = Console.find(params[:id])
     unless Console.valid_params?(params)
-      redirect "/console/#{@console.id}/edit?error=invalid console"
+      redirect "/console/#{@console.slug}/edit?error=invalid console"
     end
     @Console.update(params("console"))
-    redirect "/consoles/#{@console.id}"
+    redirect "/consoles/#{@console.slug}"
   end
 
   get "/consoles/:slug" do
@@ -37,11 +37,12 @@ class ConsolesController < ApplicationController
 
   post "/consoles" do
     redirect_if_not_logged_in
-
-    unless Console.valid_params?(params)
+    @user= current_user
+    unless Console.new(params).valid?
       redirect "/consoles/new?error=invalid Console"
     end
-    Console.create(params)
+    @console = Console.create(params)
+    @user.consoles << @console
     redirect "/consoles"
   end
 
