@@ -4,8 +4,14 @@ class User < ActiveRecord::Base
   validates :username, uniqueness: { case_sensitive: false }
   validates :email, uniqueness: {case_sensitive: false }
   has_secure_password
-  extend Slugger::ClassMethods
-  include Slugger::InstanceMethods
+
+  def slug
+    username.downcase.split.join("-")
+  end
+
+  def self.find_by_slug(slug)
+    self.all.detect {|s| s.slug == slug}
+  end
 
 
 
