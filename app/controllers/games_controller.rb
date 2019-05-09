@@ -36,7 +36,7 @@ class GamesController < ApplicationController
       redirect "/games/new?error=invalid Game"
     end
     @game = Game.new(:name => params[:name], :developer=> params[:developer], :date_added => params[:date_added], :genre => params[:genre], :review => params[:review], :console_id => params[:console_id])
-    
+
     @game.user = current_user
     @game.save
     redirect "/games"
