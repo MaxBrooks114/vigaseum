@@ -5,15 +5,17 @@ class UsersController < ApplicationController
      if !logged_in?
        erb :'users/signup'
      else
+       @user = current_user #set
+       session[:user_id] = @user.id
        redirect "/users/#{@user.slug}"
      end
    end
 
    post '/signup' do
-     if params[:username].empty?|| params[:password].empty? || params[:email].empty?
-       redirect to '/signup'
-     elsif !User.new(params[:user]).valid?
-       redirect to '/login'
+     if params["username"] != "" && params[:email] != "" && params[:password] != ""
+        @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+        session[:user_id] = @user.id
+        redirect "/users/#{@user.slug}"
      else
        @user = User.create(:username => params[:username], :password => params[:password], :email => params[:email])
        session[:user_id] = @user.id
@@ -26,6 +28,8 @@ class UsersController < ApplicationController
      if !logged_in?
        erb :'users/login'
      else
+       @user = current_user
+       session[:user_id] = @user.id
        redirect "/users/#{@user.slug}"
      end
    end
