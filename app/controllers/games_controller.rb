@@ -32,13 +32,11 @@ class GamesController < ApplicationController
   post "/games" do
     redirect_if_not_logged_in
     @user= current_user
-    # unless Game.new(:name => params[:name]).valid?
-    #   redirect "/games/new?error=invalid Game"
-    # end
+    unless Game.new(:name => params[:name]).valid?
+      redirect "/games/new?error=invalid Game"
+    end
     @game = Game.new(:name => params[:name], :developer=> params[:developer], :date_added => params[:date_added], :genre => params[:genre], :review => params[:review], :console_id => params[:console_id])
-    # if Console.find(@game.console_id)
-    #   Console.games << @game
-    # end
+    
     @game.user = current_user
     @game.save
     redirect "/games"
