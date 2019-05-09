@@ -3,7 +3,10 @@
 <p>
   Date Added:<%=@console.date_added%><br />
   Generation:<%=@console.generation%><br />
-  Games:<%=@console.games%><br />
+  Games:<ul> <%@console.games.each do |game|%>
+         <li><a href= "/games/<%=game.slug%>"><%=game.name%></a></li>
+   <%end%>
+     </ul>
 </p>
 
 
