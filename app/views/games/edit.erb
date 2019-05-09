@@ -1,0 +1,23 @@
+<h1>Edit Your Game</h1>
+
+<form action="/games/<%=@game.slug%>" method= "post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <input type="text" name="name" value="<%=@game.name%>"> <br />
+  <input type="text" name="developer" value="<%=@game.developer%>"> <br />
+  <input type="text" name="genre"  value="<%=@game.genre%>"> <br />
+   <%@consoles.each do |console|%>
+  <input type="checkbox" name="game[console_id]" id="<%=console.id%>" value="<%=console.id%>"><%=console.name%><br />
+   <%end%>
+   <input type="date" name="date_added" placeholder="date_added" value="<%=@game.date_added%>"> <br />
+   <input type="integer" name="review" placeholder="your score" value="<%=@game.review%>"> <br />
+   <input type="submit" value="submit">
+    </form>
+
+
+  <br>
+  <br>
+  <br>
+  <a href="/users/:slug">Back to your Collection</a>
+  <br>
+  <br>
+  <a href="/logout">Logout</a>
