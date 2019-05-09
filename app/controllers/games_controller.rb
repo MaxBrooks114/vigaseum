@@ -1,20 +1,20 @@
 class GamesController < ApplicationController
 
    get '/games' do
-    redirect_if_not_logged_in
+    # redirect_if_not_logged_in
     @games = Game.all
     @user = current_user
     erb :'games/index'
   end
 
   get "/games/new" do
-    redirect_if_not_logged_in
+    # redirect_if_not_logged_in
     @consoles = Console.all
     erb :'games/new'
   end
 
   get "/games/:slug/edit" do
-    redirect_if_not_logged_in
+    # redirect_if_not_logged_in
     @game = Game.find_by_slug(params[:slug])
     erb :'games/edit'
   end
@@ -29,7 +29,7 @@ class GamesController < ApplicationController
   end
 
   post "/games" do
-    redirect_if_not_logged_in
+    # redirect_if_not_logged_in
     @user= current_user
     unless Game.new(:name => params[:name]).valid?
       redirect "/games/new?error=invalid Game"
