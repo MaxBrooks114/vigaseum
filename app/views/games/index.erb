@@ -1,7 +1,7 @@
 <h1> <%=@user.username%>' Games:</h1>
 <% @games.each do |game|%>
 <ul>
-    <li> <a href="/games/<%=game.slug%>"><%=game.name%>(<%=game.console%>)</a></li>
+    <li> <a href="/games/<%=game.slug%>"><%=game.name%> (<%=game.console.name%>)</a></li>
 </ul>
 
 <%end%>

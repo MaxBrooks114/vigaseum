@@ -1,20 +1,21 @@
 class GamesController < ApplicationController
 
    get '/games' do
-    # redirect_if_not_logged_in
+    redirect_if_not_logged_in
     @games = Game.all
     @user = current_user
     erb :'games/index'
   end
 
   get "/games/new" do
-    # redirect_if_not_logged_in
+    redirect_if_not_logged_in
     @consoles = Console.all
     erb :'games/new'
   end
 
   get "/games/:slug/edit" do
-    # redirect_if_not_logged_in
+    redirect_if_not_logged_in
+    @consoles = Console.all
     @game = Game.find_by_slug(params[:slug])
     erb :'games/edit'
   end
@@ -29,12 +30,15 @@ class GamesController < ApplicationController
   end
 
   post "/games" do
-    # redirect_if_not_logged_in
+    redirect_if_not_logged_in
     @user= current_user
-    unless Game.new(:name => params[:name]).valid?
-      redirect "/games/new?error=invalid Game"
-    end
-    @game = Game.new(:name => params[:name], :company => params[:company], :date_added => params[:date_added], :generation => params[:generation])
+    # unless Game.new(:name => params[:name]).valid?
+    #   redirect "/games/new?error=invalid Game"
+    # end
+    @game = Game.new(:name => params[:name], :developer=> params[:developer], :date_added => params[:date_added], :genre => params[:genre], :review => params[:review], :console_id => params[:console_id])
+    # if Console.find(@game.console_id)
+    #   Console.games << @game
+    # end
     @game.user = current_user
     @game.save
     redirect "/games"
@@ -42,14 +46,14 @@ class GamesController < ApplicationController
 
 
   patch '/games/:slug' do
-#    if logged_in?
+   if logged_in?
      game = Game.find_by_slug(params[:slug])
-     game.update(:name => params[:name], :company => params[:company], :date_added => params[:date_added], :generation => params[:generation])
+     game.update(:name => params[:name], :developer=> params[:developer], :date_added => params[:date_added], :genre => params[:genre], :review => params[:review], :console_id => params[:console_id])
      game.save
-      redirect "/games/#{game.slug}"
-#    else
-#      redirect "/games/#{params[:slug]}/edit"
-#    end
+    redirect "/games/#{game.slug}"
+   else
+     redirect "/games/#{params[:slug]}/edit"
+   end
  end
 
  post '/games/:slug/delete' do
