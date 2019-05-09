@@ -42,7 +42,7 @@ class ConsolesController < ApplicationController
 
 
   patch '/consoles/:slug' do
-   if logged_in? 
+   if logged_in?
      console = Console.find_by_slug(params[:slug])
      console.update(:name => params[:name], :company => params[:company], :date_added => params[:date_added], :generation => params[:generation])
      console.save
@@ -63,6 +63,9 @@ class ConsolesController < ApplicationController
    end
  end
 
-
+ get '/consoles/games/:slug' do
+    @game= Game.find_by_slug(params[:slug])
+    redirect "games/#{@game.slug}"
+ end
 
 end
