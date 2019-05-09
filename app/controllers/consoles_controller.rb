@@ -16,17 +16,7 @@ class ConsolesController < ApplicationController
   get "/consoles/:slug/edit" do
     redirect_if_not_logged_in
     @console = Console.find_by_slug(params[:slug])
-    erb :'console/edit'
-  end
-
-  post "/consoles/:slug" do
-    redirect_if_not_logged_in
-    @console = Console.find_by_slug(params[:slug])
-    unless Console.new(:name => params[:name]).valid?
-      redirect "/consoles/#{@console.slug}/edit?error=invalid console"
-    end
-    @Console.update(params("console"))
-    redirect "/consoles/#{@console.slug}"
+    erb :'consoles/edit'
   end
 
   get '/consoles/:slug' do
@@ -49,6 +39,29 @@ class ConsolesController < ApplicationController
     @console.save
     redirect "/consoles"
   end
+
+
+  patch '/consoles/:slug' do
+   if logged_in?
+     @console = Console.find_by_slug(params[:slug])
+     @Console.update(:name => params[:name], :company => params[:company], :date_added => params[:date_added], :generation => params[:generation])
+     @console.save
+     erb :'consoles/show'
+   else
+     redirect "/consoles/#{params[:slug]}/edit"
+   end
+ end
+
+ post '/consoles/:slug/delete' do
+   @console = Console.find_by_slug(params[:slug])
+   @user = current_user
+   if logged_in?
+     @console.delete
+     redirect '/consoles'
+   else
+     redirect "/consoles/#{@console.slug}"
+   end
+ end
 
 
 

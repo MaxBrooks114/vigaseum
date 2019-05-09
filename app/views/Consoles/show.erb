@@ -8,11 +8,12 @@
 
 
 
-<% if logged_in? && @console.user_id == session[:user_id] %>
+
   <a href="/consoles/<%=@console.slug%>/edit">Edit Console</a>
   <br>
-  <a href="/consoles/<%=@console.slug%>/delete">Delete Console</a>
-<% end %>
+  <form method="POST" action="/consoles/<%=@console.slug%>/delete">
+    <input type="submit" value="Delete Console">
+  </form>
 
 <a href="/users/:slug">Back to your Collection</a>
 <br>
