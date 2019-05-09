@@ -1,0 +1,23 @@
+<h1><%=current_user.username.capitalize%>'s <%=@game.name%></h1>
+
+<p>
+  Developer:<%=@game.developer%><br />
+  Genre:<%=@game.genre%><br />
+  Your Score:<%=@game.review%><br />
+  Date Added: <%=@game.date_added%><br />
+
+</p>
+
+
+
+
+  <a href="/games/<%=@game.slug%>/edit">Edit Game</a>
+  <br>
+  <form method="POST" action="/games/<%=@game.slug%>/delete">
+    <input type="submit" value="Delete Game">
+  </form>
+
+<a href="/users/:slug">Back to your Collection</a>
+<br>
+<br>
+<a href="/logout">Logout</a>
