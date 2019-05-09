@@ -1,0 +1,13 @@
+<h1> Enter your new game's info here:</h1>
+
+<form action="/games" method= "post">
+  <input type="text" name="name" placeholder="Title"> <br />
+   <input type="text" name="developer" placeholder="Developer"> <br />
+   <input type="text" name=genre" placeholder="Genre"> <br />
+   <%@consoles.each do |console|%>
+   <input type="checkbox" name="game[console_id]" id="<%=console.id%>" value="<%=console.id%>"><%=console.name%></input><br />
+   <%end%>
+   <input type="date" name="date_added" placeholder="date_added"> <br />
+   <input type="integer" name="review" placeholder="your score"> <br />
+   <input type="submit" value="submit">
+  </form>
