@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :games, through: :consoles
   validates :username, uniqueness: { case_sensitive: false }
   validates :email, uniqueness: {case_sensitive: false }
+  validates :username, :email, :password, presence: true 
   has_secure_password
 
   def slug
