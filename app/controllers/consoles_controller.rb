@@ -20,6 +20,7 @@ class ConsolesController < ApplicationController
   end
 
   get '/consoles/:slug' do
+    redirect_if_not_logged_in
     @console = Console.find_by_slug(params[:slug])
     if current_user
       erb :'consoles/show'
@@ -31,7 +32,7 @@ class ConsolesController < ApplicationController
   post "/consoles" do
     redirect_if_not_logged_in
     @user= current_user
-    unless Console.new(:name => params[:name]).valid?
+    unless Console.new(params).valid?
       redirect "/consoles/new?error=invalid Console"
     end
     @console = Console.new(:name => params[:name], :company => params[:company], :date_added => params[:date_added], :generation => params[:generation])
@@ -53,6 +54,7 @@ class ConsolesController < ApplicationController
  end
 
  post '/consoles/:slug/delete' do
+   redirect_if_not_logged_in
    @console = Console.find_by_slug(params[:slug])
    @user = current_user
    if logged_in?
@@ -64,6 +66,7 @@ class ConsolesController < ApplicationController
  end
 
  get '/consoles/games/:slug' do
+   redirect_if_not_logged_in
     @game= Game.find_by_slug(params[:slug])
     redirect "games/#{@game.slug}"
  end
