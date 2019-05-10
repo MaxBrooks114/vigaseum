@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 20190507151331) do
   create_table "consoles", force: :cascade do |t|
     t.string  "name"
     t.string  "company"
-    t.string  "games"
     t.date    "date_added"
     t.integer "generation"
     t.integer "user_id"
