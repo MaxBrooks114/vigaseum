@@ -1,7 +1,12 @@
 <h1><%= @user.username %>'s Collection</h1>
 
+
 <a href = '/consoles'>Your Consoles</a><br />
-<a href = '/games'>Your Games</a><br />
 <a href = '/consoles/new'>Add a new console</a><br />
-<a href = '/games/new'>Add a new game</a><br />
+<%if Console.all ==[]%>
+  Before you add any games please add a console<br />
+<%else%>
+  <a href = '/games'>Your Games</a><br />
+  <a href = '/games/new'>Add a new game</a><br />
+<%end%>
 <a href="/logout">Logout</a>

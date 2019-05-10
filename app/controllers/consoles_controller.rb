@@ -43,11 +43,12 @@ class ConsolesController < ApplicationController
 
 
   patch '/consoles/:slug' do
-   if logged_in?
-     console = Console.find_by_slug(params[:slug])
+  redirect_if_not_logged_in
+  console = Console.find_by_slug(params[:slug])
+  if console.valid?
      console.update(:name => params[:name], :company => params[:company], :date_added => params[:date_added], :generation => params[:generation])
      console.save
-      redirect "/consoles/#{console.slug}"
+     redirect "/consoles/#{console.slug}"
    else
      redirect "/consoles/#{params[:slug]}/edit"
    end
