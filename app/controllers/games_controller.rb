@@ -58,7 +58,7 @@ class GamesController < ApplicationController
       game.save
       redirect "/games/#{game.slug}"
    else
-     redirect "/games/#{params[:slug]}/edit"
+     redirect "/games/#{params[:slug]}/edit?error=please enter valid information"
    end
  end
 
