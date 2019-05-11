@@ -21,7 +21,9 @@ class GamesController < ApplicationController
     redirect_if_not_logged_in
     @consoles = Console.all
     @game = Game.find_by_slug(params[:slug])
-    erb :'games/edit'
+    if current_user.id== @game.user_id
+      erb :'games/edit'
+    end
   end
 
   get '/games/:slug' do
@@ -51,7 +53,7 @@ class GamesController < ApplicationController
   patch '/games/:slug' do
   redirect_if_not_logged_in
   game = Game.find_by_slug(params[:slug])
-   if game.valid?
+   if game.valid? && current_user.id== game.user_id
       game.update(:name => params[:name], :developer=> params[:developer], :date_added => params[:date_added], :genre => params[:genre], :review => params[:review], :console_id => params[:console_id])
       game.save
       redirect "/games/#{game.slug}"
@@ -64,7 +66,7 @@ class GamesController < ApplicationController
    redirect_if_not_logged_in
    @game = Game.find_by_slug(params[:slug])
    @user = current_user
-   if logged_in?
+   if logged_in? && current_user.id == @game.user_id
      @game.delete
      redirect '/games'
    else
