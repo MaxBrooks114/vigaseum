@@ -11,5 +11,10 @@ class Console < ActiveRecord::Base
  def self.find_by_slug(slug)
    self.all.detect {|s| s.slug == slug}
  end
+
+ def self.favorite_console
+   Console.find(Game.group(:console_id).count.sort_by{|k, v| v}.last.first).name
+ end
+
  
 end
