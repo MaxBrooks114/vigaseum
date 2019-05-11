@@ -17,11 +17,11 @@ class Game < ActiveRecord::Base
    end
 
    def self.most_common_genre
-     self.maximum(:genre)
+      self.group(:genre).count.sort_by{|k,v| v}.reverse.first.first
    end
 
    def self.most_common_developer
-     self.maximum(:developer)
+      self.group(:developer).count.sort_by{|k,v| v}.reverse.first.first
    end
 
 end

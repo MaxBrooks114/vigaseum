@@ -1,5 +1,16 @@
 <h1><%= @user.username %>'s Collection</h1>
 
+<p>
+Highest Rated Game:<a href ="/games/<%=Game.best.slug %>"><%=Game.best.name %></a> <br />
+Favorite Console: <a href = "/consoles/<%= Console.favorite_console.slug %>"> <%= Console.favorite_console.name %></a><br />
+Favorite Developer: <%= Game.most_common_developer %> <br />
+Favorite Genre: <%= Game.most_common_genre %> <br />
+
+</p>
+
+
+
+
 
 <a href = '/consoles'>Your Consoles</a><br />
 <a href = '/consoles/new'>Add a new console</a><br />
