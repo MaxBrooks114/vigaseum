@@ -13,7 +13,7 @@ class Console < ActiveRecord::Base
  end
 
  def self.favorite_console
-   if Console.all.include?(:id)
+   if Game.group(:console_id).count.sort_by{|k, v| v}.last.first != nil
      Console.find(Game.group(:console_id).count.sort_by{|k, v| v}.last.first)
    end
  end

@@ -3,7 +3,7 @@ class Game < ActiveRecord::Base
  belongs_to :user
  validates :name, uniqueness: { case_sensitive: false}
  validates :review, numericality: {less_than_or_equal_to: 10}
- validates :name, :console_id, presence: true
+ validates :name, presence: true
    def slug
      name.downcase.split.join("-")
    end
