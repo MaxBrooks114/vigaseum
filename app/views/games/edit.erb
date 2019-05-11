@@ -6,7 +6,7 @@
   <input type="text" name="developer" value="<%=@game.developer%>"> <br />
   <input type="text" name="genre"  value="<%=@game.genre%>"> <br />
    <%@consoles.each do |console|%>
-  <input type="checkbox" name="game[console_id]" id="<%=console.id%>" value="<%=console.id%>"><%=console.name%><br />
+  <input type="checkbox" name="console_id" id="<%=console.id%>" value="<%=console.id%>"><%=console.name%><br />
    <%end%>
    <input type="date" name="date_added" placeholder="date_added" value="<%=@game.date_added%>"> <br />
    <input type="integer" name="review" placeholder="your score" value="<%=@game.review%>"> <br />

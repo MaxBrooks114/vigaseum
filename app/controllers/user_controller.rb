@@ -51,6 +51,7 @@ class UsersController < ApplicationController
    end
 
   get '/users/:slug' do
+   redirect_if_not_logged_in
    @user = User.find_by_slug(params[:slug])
    @user = current_user
    if current_user

@@ -10,7 +10,7 @@ class GamesController < ApplicationController
   get "/games/new" do
     redirect_if_not_logged_in
     @consoles = Console.all
-    if @consoles== []
+    if @consoles == []
       redirect 'consoles/new?error=please add a console before you add any games for that console'
     else
       erb :'games/new'
@@ -49,12 +49,12 @@ class GamesController < ApplicationController
 
 
   patch '/games/:slug' do
-   redirect_if_not_logged_in
-   game = Game.find_by_slug(params[:slug])
+  redirect_if_not_logged_in
+  game = Game.find_by_slug(params[:slug])
    if game.valid?
-     game.update(:name => params[:name], :developer=> params[:developer], :date_added => params[:date_added], :genre => params[:genre], :review => params[:review], :console_id => params[:console_id])
-     game.save
-     redirect "/games/#{game.slug}"
+      game.update(:name => params[:name], :developer=> params[:developer], :date_added => params[:date_added], :genre => params[:genre], :review => params[:review], :console_id => params[:console_id])
+      game.save
+      redirect "/games/#{game.slug}"
    else
      redirect "/games/#{params[:slug]}/edit"
    end

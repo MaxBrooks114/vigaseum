@@ -9,7 +9,6 @@ class ConsolesController < ApplicationController
 
   get '/consoles/new' do
     redirect_if_not_logged_in
-
     erb :'consoles/new'
   end
 
