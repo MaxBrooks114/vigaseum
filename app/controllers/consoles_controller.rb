@@ -3,8 +3,8 @@ class ConsolesController < ApplicationController
 
    get '/consoles' do
     redirect_if_not_logged_in
-    @consoles = Console.all
     @user = current_user
+    @consoles = @user.consoles
     erb :'consoles/index'
   end
 
@@ -15,7 +15,7 @@ class ConsolesController < ApplicationController
 
   get "/consoles/:slug/edit" do
     redirect_if_not_logged_in
-    @console = Console.find_by_slug(params[:slug])
+    @console = @user.consoles.find_by_slug(params[:slug])
     if current_user.id == @console.user_id
       erb :'consoles/edit'
     end
@@ -46,7 +46,7 @@ class ConsolesController < ApplicationController
 
   patch '/consoles/:slug' do
   redirect_if_not_logged_in
-  console = Console.find_by_slug(params[:slug])
+  console = @user.consoles.find_by_slug(params[:slug])
   if console.valid? && current_user.id == @console.user_id
      console.update(:name => params[:name], :company => params[:company], :date_added => params[:date_added], :generation => params[:generation])
      console.save
@@ -58,9 +58,9 @@ class ConsolesController < ApplicationController
 
  post '/consoles/:slug/delete' do
    redirect_if_not_logged_in
-   @console = Console.find_by_slug(params[:slug])
    @user = current_user
-   if logged_in? && current_user.id== @console.user_id
+   @console = @user.consoles.find_by_slug(params[:slug])
+   if logged_in? && current_user.id == @console.user_id
      @console.games.clear
      @console.delete
      redirect '/consoles'
@@ -70,8 +70,9 @@ class ConsolesController < ApplicationController
  end
 
  get '/consoles/games/:slug' do
-   redirect_if_not_logged_in
-    @game= Game.find_by_slug(params[:slug])
+    redirect_if_not_logged_in
+    @user = current_user
+    @game = @user.games.find_by_slug(params[:slug])
     redirect "games/#{@game.slug}"
  end
 

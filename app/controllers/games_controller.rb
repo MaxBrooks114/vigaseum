@@ -2,14 +2,15 @@ class GamesController < ApplicationController
 
    get '/games' do
     redirect_if_not_logged_in
-    @games = Game.all
     @user = current_user
+    @games = @user.games.all
     erb :'games/index'
   end
 
   get "/games/new" do
     redirect_if_not_logged_in
-    @consoles = Console.all
+    @user = current_user
+    @consoles = @user.consoles
     if @consoles == []
       redirect 'consoles/new?error=please add a console before you add any games for that console'
     else
@@ -19,7 +20,8 @@ class GamesController < ApplicationController
 
   get "/games/:slug/edit" do
     redirect_if_not_logged_in
-    @consoles = Console.all
+    @user = current_user
+    @consoles = @user.consoles
     @game = Game.find_by_slug(params[:slug])
     if current_user.id== @game.user_id
       erb :'games/edit'
@@ -28,7 +30,7 @@ class GamesController < ApplicationController
 
   get '/games/:slug' do
     redirect_if_not_logged_in
-    @game = Game.find_by_slug(params[:slug])
+    @game = @user.games.find_by_slug(params[:slug])
     if current_user
       erb :'games/show'
     else
@@ -52,7 +54,8 @@ class GamesController < ApplicationController
 
   patch '/games/:slug' do
   redirect_if_not_logged_in
-  game = Game.find_by_slug(params[:slug])
+  @user = current_user
+  game = @user.games.find_by_slug(params[:slug])
    if game.valid? && current_user.id== game.user_id
       game.update(:name => params[:name], :developer=> params[:developer], :date_added => params[:date_added], :genre => params[:genre], :review => params[:review], :console_id => params[:console_id])
       game.save
@@ -64,8 +67,8 @@ class GamesController < ApplicationController
 
  post '/games/:slug/delete' do
    redirect_if_not_logged_in
-   @game = Game.find_by_slug(params[:slug])
    @user = current_user
+   @game = @user.game.find_by_slug(params[:slug])
    if logged_in? && current_user.id == @game.user_id
      @game.delete
      redirect '/games'
