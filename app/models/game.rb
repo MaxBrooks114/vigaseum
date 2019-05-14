@@ -1,7 +1,6 @@
 class Game < ActiveRecord::Base
  belongs_to :console
  belongs_to :user
- validates :name, uniqueness: { case_sensitive: false}
  validates :review, numericality: {less_than_or_equal_to: 10}
  validates :name, presence: true
    def slug
