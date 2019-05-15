@@ -1,7 +1,8 @@
 class Game < ActiveRecord::Base
  belongs_to :console
  belongs_to :user
- validates :review, numericality: {less_than_or_equal_to: 10}
+ validates :review, numericality: {allow_nil: true, less_than_or_equal_to: 10}
+ validates :console_id, presence: true
  validates :name, presence: true
    def slug
      name.downcase.split.join("-")
