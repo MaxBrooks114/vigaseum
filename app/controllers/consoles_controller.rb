@@ -15,6 +15,7 @@ class ConsolesController < ApplicationController
 
   get "/consoles/:slug/edit" do
     redirect_if_not_logged_in
+    @user = current_user
     @console = @user.consoles.find_by_slug(params[:slug])
     if current_user.id == @console.user_id
       erb :'consoles/edit'
@@ -23,7 +24,8 @@ class ConsolesController < ApplicationController
 
   get '/consoles/:slug' do
     redirect_if_not_logged_in
-    @console = Console.find_by_slug(params[:slug])
+    @user = current_user
+    @console = @user.consoles.find_by_slug(params[:slug])
     if current_user
       erb :'consoles/show'
     else
@@ -46,23 +48,24 @@ class ConsolesController < ApplicationController
 
   patch '/consoles/:slug' do
   redirect_if_not_logged_in
+  @user = current_user
   console = @user.consoles.find_by_slug(params[:slug])
-  if console.valid? && current_user.id == @console.user_id
+  if params[:name].empty?
+    redirect "/consoles/#{params[:slug]}/edit?error=please enter valid information"
+  end
+     console = @user.consoles.find_by_slug(params[:slug])
      console.update(:name => params[:name], :company => params[:company], :date_added => params[:date_added], :generation => params[:generation])
      console.save
      redirect "/consoles/#{console.slug}"
-   else
-     redirect "/consoles/#{params[:slug]}/edit?error=please enter valid information"
-   end
  end
 
  post '/consoles/:slug/delete' do
    redirect_if_not_logged_in
    @user = current_user
-   @console = @user.consoles.find_by_slug(params[:slug])
+   @console = Console.where(:user_id == @user.id).find_by_slug(params[:slug])
+   @games = Game.where(:console_id == @console.id)
    if logged_in? && current_user.id == @console.user_id
-     @console.games.clear
-     @console.delete
+     @console.destroy
      redirect '/consoles'
    else
      redirect "/consoles/#{@console.slug}"

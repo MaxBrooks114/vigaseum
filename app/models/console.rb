@@ -1,6 +1,6 @@
 class Console < ActiveRecord::Base
  belongs_to :user
- has_many :games
+ has_many :games, :dependent => :destroy
  validates :name, presence: { case_sensitive: false }
 
 
