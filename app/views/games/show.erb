@@ -1,7 +1,7 @@
 <h1><%=current_user.username.capitalize%>'s <%=@game.name%></h1>
 
 <p>
-  Console:<% if @game.console_id %><a href="/consoles/<%=@game.console.slug%>"> <%=@game.console.name%></a><%end%><br />
+  Console:<% if @game.console_id %><a href="/consoles/<%=@game.console.slug%>"> <%=@game.console.name.capitalize%></a><%end%><br />
   Developer: <%=@game.developer%><br />
   Genre: <%=@game.genre%><br />
   Your Score: <%=@game.review%><br />

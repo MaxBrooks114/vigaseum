@@ -2,7 +2,7 @@
 
 <form action="/consoles/<%=@console.slug%>" method= "post">
   <input id="hidden" type="hidden" name="_method" value="patch">
-  <input type="text" name="name" placeholder="Name" value=<%=@console.name%> > <br />
+  <input type="text" name="name" placeholder="Name"> <br />
    <input type="text" name="company" placeholder="Company" value=<%=@console.company%>> <br />
    <input type="date" name="date_added" placeholder="Date added" value=<%=@console.date_added%> ><br />
    <input type="integer" name="generation" placeholder="Generation" value=<%=@console.generation%> > <br />

@@ -4,7 +4,7 @@
   Date Added:<%=@console.date_added%><br />
   Generation:<%=@console.generation%><br />
   Games:<ul> <%@console.games.each do |game|%>
-         <li><a href= "/games/<%=game.slug%>"><%=game.name%></a></li>
+         <li><a href= "/games/<%=game.slug%>"><%=game.name.capitalize%></a></li>
    <%end%>
      </ul>
 </p>

@@ -1,7 +1,7 @@
 <h1><%= @user.username %>'s Collection</h1>
 
 <p> <% if @user.games !=[] %>
-      Highest Rated Game: <a href ="/games/<%=@user.games.best.slug %>"><%=@user.games.best.name %></a> <br />
+      Highest Rated Game: <a href ="/games/<%=@user.games.best.slug %>"><%=@user.games.best.name.capitalize %></a> <br />
      <% if @user.games.group(:console_id).count.sort_by{|k, v| v}.last.first != nil %>
           Favorite Console: <a href = "/consoles/<%= @user.consoles.find(@user.games.group(:console_id).count.sort_by{|k, v| v}.last.first).slug %>"> <%= @user.consoles.find(@user.games.group(:console_id).count.sort_by{|k, v| v}.last.first).name %></a><br />
       <% end %>
