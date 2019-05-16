@@ -61,5 +61,16 @@ class UsersController < ApplicationController
     end
  end
 
+ post '/users/:slug/delete' do
+   redirect_if_not_logged_in
+   @user = current_user
+   if logged_in?
+     session.destroy
+     @user.destroy
+     redirect '/'
+   else
+     redirect "/users/#{@user.slug}"
+   end
+ end
 
 end

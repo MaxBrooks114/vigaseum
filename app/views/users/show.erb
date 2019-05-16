@@ -12,9 +12,6 @@
 </p>
 
 
-
-
-
 <a href = '/consoles'>Your Consoles</a><br />
 <a href = '/consoles/new'>Add a new console</a><br />
 <%if @user.consoles ==[]%>
@@ -24,3 +21,6 @@
   <a href = '/games/new'>Add a new game</a><br />
 <%end%>
 <a href="/logout">Logout</a>
+<form method="POST" action="/users/<%=@user.slug%>/delete">
+  <input type="submit" value="Delete Account">
+</form>

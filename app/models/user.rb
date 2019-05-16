@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :consoles
+  has_many :consoles, :dependent => :destroy
   has_many :games, through: :consoles
   validates :username, uniqueness: { case_sensitive: false }
   validates :email, uniqueness: {case_sensitive: false }
