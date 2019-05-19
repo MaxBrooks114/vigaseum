@@ -1,25 +1,26 @@
-<h1><%= @user.username %>'s Collection</h1>
+<h1><%= @user.username.capitalize %>'s Collection</h1>
 
-<p> <% if @user.games !=[] %>
-      Highest Rated Game: <a href ="/games/<%=@user.games.best.slug %>"><%=@user.games.best.name.capitalize %></a> <br />
+<p class = "stats"> <% if @user.games !=[] %>
+  <ul>
+    <li> Highest Rated Game: <a href ="/games/<%=@user.games.best.slug %>"><%=@user.games.best.name.capitalize %></a> </li>
      <% if @user.games.group(:console_id).count.sort_by{|k, v| v}.last.first != nil %>
-          Favorite Console: <a href = "/consoles/<%= @user.consoles.find(@user.games.group(:console_id).count.sort_by{|k, v| v}.last.first).slug %>"> <%= @user.consoles.find(@user.games.group(:console_id).count.sort_by{|k, v| v}.last.first).name %></a><br />
+      <li> Favorite Console: <a href = "/consoles/<%= @user.consoles.find(@user.games.group(:console_id).count.sort_by{|k, v| v}.last.first).slug %>"> <%= @user.consoles.find(@user.games.group(:console_id).count.sort_by{|k, v| v}.last.first).name %></a></li>
       <% end %>
-      Favorite Developer: <%= @user.games.most_common_developer %> <br />
-      Favorite Genre: <%=@user.games.most_common_genre %> <br />
+      <li> Favorite Developer: <%= @user.games.most_common_developer %> </li>
+      <li> Favorite Genre: <%=@user.games.most_common_genre %></li>
     <% end %>
-
+    </ul>
 </p>
 
-
-<a href = '/consoles'>Your Consoles</a><br />
-<a href = '/consoles/new'>Add a new console</a><br />
 <%if @user.consoles ==[]%>
   Before you add any games please add a console<br />
 <%else%>
   <a href = '/games'>Your Games</a><br />
   <a href = '/games/new'>Add a new game</a><br />
 <%end%>
+
+<a href = '/consoles'>Your Consoles</a><br />
+<a href = '/consoles/new'>Add a new console</a><br />
 <a href="/logout">Logout</a>
 <form method="POST" action="/users/<%=@user.slug%>/delete">
   <input type="submit" value="Delete Account">

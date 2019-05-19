@@ -2,7 +2,7 @@
 <% @games.order(:name).each do |game|%>
    <% if game %>
 <ul>
-    <li> <a href="/games/<%=game.slug%>"><%=game.name%> (<% if game.console_id %><%=game.console.name%><%end%>) </a></li>
+    <li> <a href="/games/<%=game.slug%>"><%=game.name%> (<%=game.console.name%>) </a></li>
 </ul>
    <% end %>
 <% end %>

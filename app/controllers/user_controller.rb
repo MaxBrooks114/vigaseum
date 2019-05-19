@@ -5,7 +5,7 @@ class UsersController < ApplicationController
      if !logged_in?
        erb :'users/signup'
      else
-       @user = current_user #set
+       @user = current_user 
        session[:user_id] = @user.id
        redirect "/users/#{@user.slug}"
      end
