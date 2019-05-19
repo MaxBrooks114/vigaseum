@@ -57,7 +57,7 @@ class GamesController < ApplicationController
    redirect_if_not_logged_in
    @user = current_user
    game = @user.games.find_by_slug(params[:slug])
-   if !params[:name].empty?
+   if !params[:name].empty? && game.user_id == @user.id
       game.update(:name => params[:name], :developer=> params[:developer], :date_added => params[:date_added], :genre => params[:genre], :review => params[:review], :console_id => params[:console_id])
       game.save
       redirect "/games/#{game.slug}"

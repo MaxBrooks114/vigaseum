@@ -50,7 +50,7 @@ class ConsolesController < ApplicationController
   redirect_if_not_logged_in
   @user = current_user
   console = @user.consoles.find_by_slug(params[:slug])
-  if params[:name].empty?
+  if params[:name].empty? && console.user_id == @user.id
     redirect "/consoles/#{params[:slug]}/edit?error=please enter valid information"
   end
      console = @user.consoles.find_by_slug(params[:slug])
