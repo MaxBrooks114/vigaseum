@@ -1,14 +1,13 @@
 <h1><%=current_user.username.capitalize%>'s <%=@game.name%></h1>
 
-<p>
-  Console:<% if @game.console_id %><a href="/consoles/<%=@game.console.slug%>"> <%=@game.console.name.capitalize%></a><%end%><br />
-  Developer: <%=@game.developer%><br />
-  Genre: <%=@game.genre%><br />
-  Your Score: <%=@game.review%><br />
-  Date Added: <%=@game.date_added%><br />
+  <ul>
+    <li> Console:<% if @game.console_id %><a href="/consoles/<%=@game.console.slug%>"> <%=@game.console.name.capitalize%></a><%end%></li>
+    <li> Developer: <%=@game.developer%></li>
+    <li>Genre: <%=@game.genre%></li>
+    <li>Your Score: <%=@game.review%></li>
+    <li>Date Added: <%=@game.date_added%></li>
 
-</p>
-
+  </ul>
 
 
 
