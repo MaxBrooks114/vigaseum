@@ -15,8 +15,6 @@
 
   /* --- Welcome Page Styles --- */
   body {
-    background-image: url("/Users/maxbrooks/vigaseum/public/images/download.jpeg");
-    background-size: cover;
     background-color: black;
     color: #555;
     line-height: 18px;
