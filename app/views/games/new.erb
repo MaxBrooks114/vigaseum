@@ -5,7 +5,7 @@
    <input type="text" name="developer" placeholder="Developer"> <br />
    <input type="text" name="genre" placeholder="Genre"> <br />
    <%@consoles.each do |console|%>
-   <input type="checkbox" name="console_id" id="<%=console.id%>" value="<%=console.id%>"><%=console.name%><br />
+   <input type="radio" name="console_id" id="<%=console.id%>" value="<%=console.id%>"><%=console.name%><br />
    <%end%>
    <input type="date" name="date_added" placeholder="date_added"> <br />
    <input type="integer" name="review" placeholder="your score"> <br />

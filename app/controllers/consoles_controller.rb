@@ -63,7 +63,6 @@ class ConsolesController < ApplicationController
    redirect_if_not_logged_in
    @user = current_user
    @console = Console.where(:user_id == @user.id).find_by_slug(params[:slug])
-   @games = Game.where(:console_id == @console.id)
    if logged_in? && current_user.id == @console.user_id
      @console.destroy
      redirect '/consoles'
