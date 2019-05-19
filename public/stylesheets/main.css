@@ -15,9 +15,11 @@
 
   /* --- Welcome Page Styles --- */
   body {
-    background-color: black;
+    background-image: url('../images/download.jpeg');
+    background-size: tile;
     color: #555;
     line-height: 18px;
+
   }
 
   .wrapper {
